@@ -38,10 +38,8 @@ form.addEventListener('submit', (event) => {
   urlQuery = userInput;
   url = urlBase + urlQuery;
 
-  //Clears the previous search results, provided by co-pilot
-  const searchResults = document.querySelectorAll('.searchR');
-  searchResults.forEach(result => result.remove());
-
+  clearElements('.searchR');
+  clearElements('.selectR');
   searchRequest();
   console.log(url);
 
@@ -82,9 +80,7 @@ function imageSelect () {;
 
     // Loop through each image element and add a click event listener
     image.addEventListener('click', () => {
-          //Clears the previous search results, provided by co-pilot
-        const searchResults = document.querySelectorAll('.searchR');
-        searchResults.forEach(result => result.remove());
+        clearElements('.searchR');
         selectResult(index);
         });
 
@@ -101,6 +97,12 @@ function selectResult(selectedValue) {
             + "<div><p>" + showRequest_array.description[selectedValue]["#AKA"] + "</p></div>";
 
     document.getElementById("SelectedImage").appendChild(selectR);
+};
+
+function clearElements (elementId) {
+    //Clears the previous search results, provided by co-pilot
+    const searchResults = document.querySelectorAll(elementId);
+    searchResults.forEach(result => result.remove());
 };
 
 
