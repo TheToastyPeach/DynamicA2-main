@@ -19,13 +19,14 @@ function searchRequest() {
             while (index <= showRequest_array.description.length - 1){
                 searchResult();
             };
-
             imageSelect();
+
         } else {
             console.log('Error, xhr status: ' + xhr.status); //check for error in xhr request
         };
 
         index = 0; //reset index to 0
+
     }; 
 };
 
@@ -43,6 +44,7 @@ form.addEventListener('submit', (event) => {
 
   searchRequest();
   console.log(url);
+
 });
 
 
@@ -61,7 +63,18 @@ function searchResult() {
     document.getElementById("PrimaryContent__group").appendChild(searchR);
 };
 
-function imageSelect (photoIndex){
+function selectResult(selectedValue) {
+    const searchR = document.createElement("div");
+    searchR.className = "searchR";
+        searchR.innerHTML = "<figure>" 
+            + "<img src='" + showRequest_array.description[selectedValue]["#IMG_POSTER"]
+            + "'>" 
+            + "<p>" + showRequest_array.description[selectedValue]["#AKA"] + "</p>"
+            + "</figure>";
+    document.getElementById("PrimaryContent__group").appendChild(searchR);
+};
+
+function imageSelect () {;
     //From co-pilot
     const images = document.querySelectorAll('img');
 
@@ -77,9 +90,12 @@ function imageSelect (photoIndex){
 
     // Loop through each image element and add a click event listener
     image.addEventListener('click', () => {
-        // When an image is clicked, log its index value to the console
-        console.log(`Image ${index} was clicked!`);
+          //Clears the previous search results, provided by co-pilot
+        const searchResults = document.querySelectorAll('.searchR');
+        searchResults.forEach(result => result.remove());
+        selectResult(index);
         });
+
     });
 };
 
