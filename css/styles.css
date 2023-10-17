@@ -68,9 +68,20 @@ input {
     
 }
 
+.selectR {
+    display: grid;
+    font-weight: normal;
+    font-size: 1.25rem;
+    grid-template-columns: 2fr 1fr;
+}
+
 .hoveringImg {
     transition: 0.2s;
     opacity: 0.8;
+}
+
+#SelectedImage {
+
 }
 
 #ContentSearch {

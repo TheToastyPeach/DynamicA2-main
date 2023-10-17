@@ -19,13 +19,13 @@ function searchRequest() {
             while (index <= showRequest_array.description.length - 1){
                 searchResult();
             };
-            imageSelect();
+            imageSelect(); //Search for hover states and click events on search results 
 
         } else {
-            console.log('Error, xhr status: ' + xhr.status); //check for error in xhr request
+            console.log('Error, xhr status: ' + xhr.status); //check for error in xhr request (I had many errors)
         };
 
-        index = 0; //reset index to 0
+        index = 0; //reset index to 0 to display new search results 
 
     }; 
 };
@@ -51,6 +51,7 @@ form.addEventListener('submit', (event) => {
 var index = 0;
 var selectedValue;
 
+//Display the search results
 function searchResult() {
     const searchR = document.createElement("div");
     searchR.className = "searchR";
@@ -63,17 +64,8 @@ function searchResult() {
     document.getElementById("PrimaryContent__group").appendChild(searchR);
 };
 
-function selectResult(selectedValue) {
-    const searchR = document.createElement("div");
-    searchR.className = "searchR";
-        searchR.innerHTML = "<figure>" 
-            + "<img src='" + showRequest_array.description[selectedValue]["#IMG_POSTER"]
-            + "'>" 
-            + "<p>" + showRequest_array.description[selectedValue]["#AKA"] + "</p>"
-            + "</figure>";
-    document.getElementById("PrimaryContent__group").appendChild(searchR);
-};
-
+//Selecting the image and adding hover states
+//Uses selectResult to display the selected content and index
 function imageSelect () {;
     //From co-pilot
     const images = document.querySelectorAll('img');
@@ -97,6 +89,18 @@ function imageSelect () {;
         });
 
     });
+};
+
+//Display the selected result
+function selectResult(selectedValue) {
+    const selectR = document.createElement("div");
+    selectR.className = "selectR";
+        selectR.innerHTML = "<figure>" 
+            + "<img src='" + showRequest_array.description[selectedValue]["#IMG_POSTER"] + "'>" 
+            + "</figure>"
+            + "<div><p>" + showRequest_array.description[selectedValue]["#AKA"] + "</p></div>";
+
+    document.getElementById("SelectedImage").appendChild(selectR);
 };
 
 
