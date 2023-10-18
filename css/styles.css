@@ -45,6 +45,9 @@ input {
 
 }
 
+p {
+    margin: 0;
+}
 
 .main-button{
     text-decoration: none;
@@ -76,15 +79,21 @@ input {
     grid-template-columns: 2fr 1fr;
 }
 
+h2.selectR {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
 .hoveringImg {
     transition: 0.2s;
     opacity: 0.8;
     border-radius: 10px;
 }
 
-#SelectedImage {
+/* #SelectedImage {
 
-}
+} */
 
 #ContentSearch {
     display: flex;
