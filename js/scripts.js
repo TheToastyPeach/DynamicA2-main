@@ -8,8 +8,8 @@ var url;
 var player1Select;
 var player2Select;
 var player1Turn = true;
-var isReve
-var isHigh;
+var isReve = false;
+var isHigh = true;
 
 var showRequest_array;
 
@@ -21,10 +21,10 @@ const switch1 = document.querySelector('#reviReve');
 switch1.addEventListener('change', () => {
   if (switch1.checked) {
     isReve = true;
-    console.log(isReve);
+    console.log("on rev = " + isReve);
   } else {
     isReve = false;
-    console.log(isReve);
+    console.log("on rev = " + isReve);
   }
 });
 
@@ -32,10 +32,10 @@ const switch2 = document.querySelector('#hL');
 switch2.addEventListener('change', () => {
   if (switch2.checked) {
     isHigh = false;
-    console.log(isHigh);
+    console.log("on higher = " + isHigh);
   } else {
     isHigh = true;
-    console.log(isHigh);
+    console.log("on higher = " + isHigh);
   }
 });
 
@@ -251,6 +251,8 @@ function playerChoice () {
 
 
 function comparePlayerChoice() {
+    console.log(isReve);
+    console.log(isHigh);
     if (isHigh) { 
         if (isReve) {
             var temp = player1Select.revenue - player2Select.revenue;
@@ -299,35 +301,36 @@ function displayWinner (winNum) {
     selectR.className = "selectR";
     if (winNum == 1) {
         console.log("Player 1 wins");
-                selectR.innerHTML = 
-    //Title and Image
-                    "<div><figure><h2 class='selectR'>" + player1Select.title + "is the winner! </h2>"
-                    + " <img src='" + player1Select.image + "'>" 
-                    + "</figure></div>"
-    //Show or Movie Details 
-                    + "<div class='centerContent'>"
-                        + "<h3> Review Average: </h3>"
-                        + "<div><p>" + player1Select.review + "</p>"
-                        + "<h3>Revenue in the box office: </h3>"
-                        + "<p> Rating: " + player1Select.revenue + "</p>" 
-                        + "<p> Realease Date: " + player1Select.date + "</p>"
-                    + "</div>";
+        selectR.innerHTML = 
+//Title and Image
+            "<div><figure><h2 class='selectR'>" + player1Select.title + "is the winner! </h2>"
+            + " <img src='" + player1Select.image + "'>" 
+            + "<p> Realease Date: " + player1Select.date + "</p>"
+            + "</figure></div>"
+//Show or Movie Details 
+            + "<div class='centerContent'>"
+                + "<h3>Revenue in the box office: </h3>"
+                + "<h4>$ " + JSON.parse(player1Select.revenue).toLocaleString() + "</h4>" 
+                + "<h3> Rating: </h3>"
+                + "<h4>" + player1Select.review + " / 10 </h4>"
+            + "</div>";
             document.getElementById("SelectedImage").appendChild(selectR);
     } else if (winNum == 2) {
         console.log("Player 2 wins");
         selectR.innerHTML = 
-        //Title and Image
-                        "<div><figure><h2 class='selectR'>" + player2Select.title + "is the winner! </h2>"
-                        + " <img src='" + player2Select.image + "'>" 
-                        + "</figure></div>"
-        //Show or Movie Details 
-                        + "<div class='centerContent'>"
-                            + "<h3> Review Average: </h3>"
-                            + "<div><p>" + player2Select.review + "</p>"
-                            + "<h3>Revenue in the box office: </h3>"
-                            + "<p> Rating: " + player2Select.revenue + "</p>" 
-                            + "<p> Realease Date: " + player2Select.date + "</p>"
-                        + "</div>";
+//Title and Image
+            "<div><figure><h2 class='selectR'>" + player2Select.title + "is the winner! </h2>"
+            + " <img src='" + player2Select.image + "'>" 
+            + "<p> Realease Date: " + player2Select.date + "</p>"
+            + "</figure></div>"
+//Show or Movie Details 
+            + "<div class='centerContent'>"
+                + "<h3>Revenue in the box office: </h3>"
+                + "<h4>$ " + JSON.parse(player2Select.revenue).toLocaleString() + "</h4>" 
+                + "<h3> Rating: </h3>"
+                + "<h4>" + player2Select.review + " / 10 </h4>"
+            + "</div>";
+            document.getElementById("SelectedImage").appendChild(selectR);
     };
 };
 
