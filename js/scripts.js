@@ -167,7 +167,7 @@ function selectResult() {
                 + "</figure></div>"
 //Show or Movie Details 
                 + "<div class='centerContent'>"
-                    + "<h3> Summary: </h3>"
+                    + "<div><h3> Summary: </h3></div>"
                     + "<div><p>" + showRequest_array.short.description + "</p>"
                     + "<h3>Rating & Release </h3>"
                     + "<p> Rating: " + showRequest_array.short.contentRating + "</p>" 
@@ -297,13 +297,22 @@ function comparePlayerChoice() {
 };
 
 function displayWinner (winNum) {
+    clearElements('.selectR');
+    clearElements('.searchR');
+    const hide = document.getElementById('ContentSearch');
+    hide.style.display = "none";
+    const hideMe = document.getElementById('clearMe');
+    hideMe.style.display = "none";
+    const hideSwitch = document.getElementById('SortingChoice');
+    hideSwitch.style.display = "none";
+
     const selectR = document.createElement("div");
-    selectR.className = "selectR";
+    selectR.className = "selectR";S
     if (winNum == 1) {
         console.log("Player 1 wins");
         selectR.innerHTML = 
 //Title and Image
-            "<div><figure><h2 class='selectR'>" + player1Select.title + "is the winner! </h2>"
+            "<div><figure><h2 class='selectR'>" + player1Select.title + " is the winner! </h2>"
             + " <img src='" + player1Select.image + "'>" 
             + "<p> Realease Date: " + player1Select.date + "</p>"
             + "</figure></div>"
@@ -319,7 +328,7 @@ function displayWinner (winNum) {
         console.log("Player 2 wins");
         selectR.innerHTML = 
 //Title and Image
-            "<div><figure><h2 class='selectR'>" + player2Select.title + "is the winner! </h2>"
+            "<div><figure><h2 class='selectR'>" + player2Select.title + " is the winner! </h2>"
             + " <img src='" + player2Select.image + "'>" 
             + "<p> Realease Date: " + player2Select.date + "</p>"
             + "</figure></div>"
@@ -329,8 +338,13 @@ function displayWinner (winNum) {
                 + "<h4>$ " + JSON.parse(player2Select.revenue).toLocaleString() + "</h4>" 
                 + "<h3> Rating: </h3>"
                 + "<h4>" + player2Select.review + " / 10 </h4>"
+                +"<div class='centerContent'><button type='button' class='main-button' id='reset-button'> Wanna play again? </button>"
             + "</div>";
             document.getElementById("SelectedImage").appendChild(selectR);
+            const resetBtn = document.getElementById('reset-button');
+            resetBtn.addEventListener('click', () => {
+                location.reload();
+            });
     };
 };
 

@@ -6,6 +6,7 @@
 html, body {
     margin: 0;
     min-height: 100vh;
+    font-family: 'Lato', sans-serif;
 }
 
 img {
@@ -73,6 +74,7 @@ h3 {
     background-color: white;
     border-radius: 0px 10px 0px 10px;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.055);
+    text-align: left;
 }
 
 h4 {
@@ -193,6 +195,10 @@ h2.selectR {
     visibility: visible;
 }
 
+#clearMe {
+    visibility: visible;
+}
+
 #SortingChoice {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -201,6 +207,7 @@ h2.selectR {
     grid-column-gap: 0px;
     max-width: 200px;
     margin: 0 auto;
+    visibility: visible;
 }
 
 .searchO {
