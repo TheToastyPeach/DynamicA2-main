@@ -6,3 +6,6 @@
 <p>------------------------------------------------------------------------------------------------------------</p>
 <p>This site makes use of the <em>IMDbOT API</em>, take a look here:</p>
 <p>https://github.com/SpEcHiDe/IMDbOT</p>
+<p>------------------------------------------------------------------------------------------------------------</p>
+<p>To use the site, choose your options with the sliders, and have you and a friend take turns looking for a movie
+that fits the criteria set! TV shows don't work for revenue as they can't have a box office release!</p>
