@@ -307,7 +307,7 @@ function displayWinner (winNum) {
     hideSwitch.style.display = "none";
 
     const selectR = document.createElement("div");
-    selectR.className = "selectR";S
+    selectR.className = "selectR";
     if (winNum == 1) {
         console.log("Player 1 wins");
         selectR.innerHTML = 
