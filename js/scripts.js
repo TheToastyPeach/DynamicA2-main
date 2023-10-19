@@ -8,6 +8,7 @@ var url;
 var player1Select;
 var player2Select;
 var player1Turn = true;
+var questionType;
 
 var showRequest_array;
 
@@ -132,14 +133,28 @@ function selectResult() {
         const selectR = document.createElement("div");
         selectR.className = "selectR";
             selectR.innerHTML = 
-                "<div><h2 class='selectR'>" + showRequest_array.main.titleText.text + "</h2>"
-                + "<p> Realeased on: <em>" + showRequest_array.main.releaseDate.year + " / " + showRequest_array.main.releaseDate.month + " / " + showRequest_array.main.releaseDate.day + "</em></p>"
-                + "<h3> Summary: </h3>"
-                + "<p>" + showRequest_array.short.description + "</p>"
-                + "<button type='button' class='main-button'> Choose this film! </button>"
+//Title and Image
+                "<div><figure><h2 class='selectR'>" + showRequest_array.main.titleText.text + "</h2>"
+                + " <img src='" + showRequest_array.short.image + "'>" 
+                + "</figure></div>"
+//Show or Movie Details 
+                + "<div><h3> Summary: </h3>"
+                + "<div><p>" + showRequest_array.short.description + "</p>"
+                + "<h3>Rating & Release </h3>"
+                + "<p> Rating: " + showRequest_array.short.contentRating + "</p>" 
+                + "<p> Realease Date: " + showRequest_array.short.datePublished + "</p>"
+                + (showRequest_array.main.worldwideGross ? // scuffed if statement
+                    "<h3> Box Office: </h3>"
+                    + "<p>" + JSON.parse(showRequest_array.main.worldwideGross.total.amount).toLocaleString() + "$ USD</p>"
+                    : "") // if there are no box office details, don't display anything
+                + "<h3> Genre/s: </h3>"
+                + "<p>" + showRequest_array.short.genre + "</p>"
+                + "<h3> Average Rating: </h3>"
+                +  "<p>" + showRequest_array.short.aggregateRating.ratingValue + " stars on IMDB</p>"
                 + "</div>"
-                + "<figure> <img src='" + showRequest_array.short.image + "'>" 
-                + "</figure>";
+//Vote button
+                + "<div><button type='button' class='main-button'> Choose this film! </button></div>"
+                + "</div>";
 
         document.getElementById("SelectedImage").appendChild(selectR);
 
@@ -169,6 +184,7 @@ function setURL (setValue, type) {
         url = urlBase + "?tt=" + setValue;
     };
 };
+
 
 
 //How you display the contet, finding key words, showing themes or reoccuring content
