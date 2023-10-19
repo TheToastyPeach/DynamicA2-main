@@ -85,6 +85,7 @@ h4 {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .main-button{
@@ -99,6 +100,59 @@ h4 {
     border: 0px;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.055);
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    display: none;
+  }
+
+  /* Co-Pilot autofill switch */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsl(150, 100%, 77%);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: hsl(46, 96%, 70%);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px hsl(46, 96%, 70%);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+/* end */
 
 .main-button:hover {
     border-radius: 10px;
@@ -138,10 +192,13 @@ h2.selectR {
 }
 
 #SortingChoice {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
     align-items: center;
-    flex-direction: column;
+    grid-column-gap: 0px;
+    max-width: 200px;
+    margin: 0 auto;
 }
 
 .searchO {

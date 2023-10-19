@@ -8,12 +8,37 @@ var url;
 var player1Select;
 var player2Select;
 var player1Turn = true;
-var questionType;
+var isReve
+var isHigh;
 
 var showRequest_array;
 
 var index = 0;
 var selectedValue;
+
+
+const switch1 = document.querySelector('#reviReve');
+switch1.addEventListener('change', () => {
+  if (switch1.checked) {
+    isReve = true;
+    console.log(isReve);
+  } else {
+    isReve = false;
+    console.log(isReve);
+  }
+});
+
+const switch2 = document.querySelector('#hL');
+switch2.addEventListener('change', () => {
+  if (switch2.checked) {
+    isHigh = false;
+    console.log(isHigh);
+  } else {
+    isHigh = true;
+    console.log(isHigh);
+  }
+});
+
 
 //Pulling searched data from the API
 function searchRequest() {
@@ -198,53 +223,115 @@ function playerChoice () {
                 title: showRequest_array.main.titleText.text,
                 image: showRequest_array.short.image,
                 date: showRequest_array.short.datePublished,
-                reveiw: showRequest_array.short.aggregateRating.ratingValue,
+                review: showRequest_array.short.aggregateRating.ratingValue,
                 revenue: showRequest_array.main.worldwideGross.total.amount
             
             };
             player1Turn = false;
             console.log(player1Select);
             clearElements('.selectR');
-            createContentSearch();
         } else {
             player2Select = {
                 title: showRequest_array.main.titleText.text,
                 image: showRequest_array.short.image,
                 date: showRequest_array.short.datePublished,
-                reveiw: showRequest_array.short.aggregateRating.ratingValue,
+                review: showRequest_array.short.aggregateRating.ratingValue,
                 revenue: showRequest_array.main.worldwideGross.total.amount
             };
             player1Turn = true;
             console.log(player2Select);
-            // clearElements('.selectR');
+            clearElements('.selectR');
+            var temp = comparePlayerChoice();
+            console.log(temp);
+            displayWinner(temp);
         };
 
     });
 };
 
-function comparePlayerChoice () {
-    
+
+function comparePlayerChoice() {
+    if (isHigh) { 
+        if (isReve) {
+            var temp = player1Select.revenue - player2Select.revenue;
+            if (temp > 0) {
+                return 1;
+            } else if (temp < 0) {
+                return 2;
+            } else {
+                return 0;
+            };
+        } else {
+            var temp = player1Select.review - player2Select.review;
+            if (temp > 0) {
+                return 1;
+            } else if (temp < 0) {
+                return 2;
+            } else {
+                return 0;
+            };
+        }
+    } else {
+        if (isReve) {
+            var temp = player1Select.revenue - player2Select.revenue;
+            if (temp > 0) {
+                return 2;
+            } else if (temp < 0) {
+                return 1;
+            } else {
+                return 0;
+            };
+        } else {
+            var temp = player1Select.review - player2Select.review;
+            if (temp > 0) {
+                return 2;
+            } else if (temp < 0) {
+                return 1;
+            } else {
+                return 0;
+            };
+        };
+    };
+};
+
+function displayWinner (winNum) {
+    const selectR = document.createElement("div");
+    selectR.className = "selectR";
+    if (winNum == 1) {
+        console.log("Player 1 wins");
+                selectR.innerHTML = 
+    //Title and Image
+                    "<div><figure><h2 class='selectR'>" + player1Select.title + "is the winner! </h2>"
+                    + " <img src='" + player1Select.image + "'>" 
+                    + "</figure></div>"
+    //Show or Movie Details 
+                    + "<div class='centerContent'>"
+                        + "<h3> Review Average: </h3>"
+                        + "<div><p>" + player1Select.review + "</p>"
+                        + "<h3>Revenue in the box office: </h3>"
+                        + "<p> Rating: " + player1Select.revenue + "</p>" 
+                        + "<p> Realease Date: " + player1Select.date + "</p>"
+                    + "</div>";
+            document.getElementById("SelectedImage").appendChild(selectR);
+    } else if (winNum == 2) {
+        console.log("Player 2 wins");
+        selectR.innerHTML = 
+        //Title and Image
+                        "<div><figure><h2 class='selectR'>" + player2Select.title + "is the winner! </h2>"
+                        + " <img src='" + player2Select.image + "'>" 
+                        + "</figure></div>"
+        //Show or Movie Details 
+                        + "<div class='centerContent'>"
+                            + "<h3> Review Average: </h3>"
+                            + "<div><p>" + player2Select.review + "</p>"
+                            + "<h3>Revenue in the box office: </h3>"
+                            + "<p> Rating: " + player2Select.revenue + "</p>" 
+                            + "<p> Realease Date: " + player2Select.date + "</p>"
+                        + "</div>";
+    };
 };
 
 
-// function homeDisplay () {
-//     const home = document.createElement("div");
-//     home.className = "home";
-//         home.innerHTML = "<div class='centerContent'>"
-//             + "<h2> Welcome to the Film Picker! </h2>"
-//             + "<p> This is a tool to help you and your friends decide on a film to watch. </p>"
-//             + "<p> Simply search for a film and click on the one you want to watch. </p>"
-//             + "<p> Once you have selected a film, click the 'Choose this film!' button to add it to your list. </p>"
-//             + "<p> Once you have both selected a film, click the 'Compare' button to see which film is the best choice. </p>"
-//             + "<p> If you want to change your choice, simply click on a new film and click the 'Choose this film!' button again. </p>"
-//             + "<p> If you want to start again, click the 'Reset' button. </p>"
-//             + "<p> Have fun! </p>"
-//             + "</div>"
-//             + "<div class='centerContent'>"
-//             + "<button type='button' class='main-button' id='reset-button'> Reset </button>"
-//             + "</div>";
-//     document.getElementById("PrimaryContent__group").appendChild(home);
-// }
 
 
     
