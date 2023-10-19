@@ -132,9 +132,17 @@ h2.selectR {
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
-/* #SelectedImage {
 
-} */
+#ContentSearch {
+    visibility: visible;
+}
+
+#SortingChoice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .searchO {
     display: flexbox;

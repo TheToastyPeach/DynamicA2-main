@@ -12,6 +12,9 @@ var questionType;
 
 var showRequest_array;
 
+var index = 0;
+var selectedValue;
+
 //Pulling searched data from the API
 function searchRequest() {
     xhr.open("GET", url, true);
@@ -33,10 +36,11 @@ function searchRequest() {
 //check for error in xhr request (I had many errors)
             console.log('Error, xhr status: ' + xhr.status);
         };
-//reset index to 0 to display new search results 
-        index = 0; 
+    //reset index to 0 to display new search results 
+    index = 0; 
 
     }; 
+
 };
 
 //Co-pilot recommended this but it didn't work so I changed it (Not sure if I have to source this)
@@ -55,8 +59,7 @@ form.addEventListener('submit', (event) => {
 });
 
 
-var index = 0;
-var selectedValue;
+
 
 //Display the search results
 function searchResult() {
@@ -93,7 +96,6 @@ function imageSelect () {
 
 
         clearElements('.searchR');
-        clearElements('.searchO');
 //Sets the target to details
         setURL(urlDetails, "t");
 console.log(url);
@@ -159,10 +161,12 @@ function selectResult() {
                 + " <button type='button' class='main-button' id='back-button'> Go back </button></div>"
                 + "</div>";
 
+
         document.getElementById("SelectedImage").appendChild(selectR);
         playerChoice();
         
     });
+
 };
 
 //Clears the selected elements 
@@ -185,7 +189,6 @@ function playerChoice () {
     const chooseBckBtn = document.getElementById('back-button');
     chooseBckBtn.addEventListener('click', () => {
         clearElements('.selectR');
-        clearElements('.searchO');
         createContentSearch();
     });
     const chooseFilmBtn = document.getElementById('film-choice-button');
@@ -197,12 +200,12 @@ function playerChoice () {
                 date: showRequest_array.short.datePublished,
                 reveiw: showRequest_array.short.aggregateRating.ratingValue,
                 revenue: showRequest_array.main.worldwideGross.total.amount
-                
+            
             };
             player1Turn = false;
             console.log(player1Select);
             clearElements('.selectR');
-            // createContentSearch();
+            createContentSearch();
         } else {
             player2Select = {
                 title: showRequest_array.main.titleText.text,
@@ -219,18 +222,8 @@ function playerChoice () {
     });
 };
 
-function createContentSearch () {
-    const contentSearch = document.createElement("div");
-    contentSearch.className = "searchO";
-        contentSearch.innerHTML = "<div class='centerContent'>"
-        + "<form>" //<!--Co-pilot recommended this-->
-        + "<div>"
-        + "<label for='userInput'>Find a film!</label>"
-        + "</div>"
-        + "<input type='text' id='userInput' name='userInput'>"
-        + "<button type='submit' class='main-button'> Search </button>"
-        + "</form>";
-    document.getElementById("ContentSearch").appendChild(contentSearch);
+function comparePlayerChoice () {
+    
 };
 
 
