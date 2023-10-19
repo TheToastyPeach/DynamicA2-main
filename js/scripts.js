@@ -5,6 +5,10 @@ const xhr = new XMLHttpRequest();
 const urlBase = "https://search.imdbot.workers.dev/";
 var url;
 
+var player1Select;
+var player2Select;
+var player1Turn = true;
+
 var showRequest_array;
 
 //Pulling searched data from the API
@@ -93,15 +97,16 @@ function imageSelect () {
 console.log(url);
 //Pulls the specifics 
         specificPull();
+console.log(showRequest_array);
 //Displays content specifics 
-        selectResult(index);
+        selectResult();
         });
+
 
     });
 };
 
-
-function specificPull () {
+function specificPull (callback) {
     xhr.open("GET", url, true);
     xhr.send(null);
     xhr.onload = function() {
@@ -109,6 +114,7 @@ function specificPull () {
         if (xhr.status == 200){
             showRequest_array= JSON.parse(xhr.response);
             console.log(showRequest_array);
+            callback();
         } else {
 //check for error in xhr request (I had many errors)
             console.log('Error, xhr status: ' + xhr.status);
@@ -120,17 +126,33 @@ function specificPull () {
 };
 
 //Display the selected result
-function selectResult(selectedValue) {
-    const selectR = document.createElement("div");
-    selectR.className = "selectR";
-        selectR.innerHTML = 
-            "<div><h2 class='selectR'>" + showRequest_array.description[selectedValue]["#TITLE"] + "</h2>"
-            + "<p> Realeased in: <em>" + showRequest_array.description[selectedValue]["#YEAR"] + "</em></p>"
-            + "</div>"
-            + "<figure> <img src='" + showRequest_array.description[selectedValue]["#IMG_POSTER"] + "'>" 
-            + "</figure>";
+function selectResult() {
+    // pass a callback function to specificPull -- waiting for specificPull to finish
+    specificPull(function() { 
+        const selectR = document.createElement("div");
+        selectR.className = "selectR";
+            selectR.innerHTML = 
+                "<div><h2 class='selectR'>" + showRequest_array.main.titleText.text + "</h2>"
+                + "<p> Realeased on: <em>" + showRequest_array.main.releaseDate.year + " / " + showRequest_array.main.releaseDate.month + " / " + showRequest_array.main.releaseDate.day + "</em></p>"
+                + "<h3> Summary: </h3>"
+                + "<p>" + showRequest_array.short.description + "</p>"
+                + "<button type='button' class='main-button'> Choose this film! </button>"
+                + "</div>"
+                + "<figure> <img src='" + showRequest_array.short.image + "'>" 
+                + "</figure>";
 
-    document.getElementById("SelectedImage").appendChild(selectR);
+        document.getElementById("SelectedImage").appendChild(selectR);
+
+        form.addEventListener('button', (event) => {
+            if (player1Turn == true) {
+                player1Select = showRequest_array.description[selectedValue]["#TITLE", "IMG_POSTER" ];
+                player1Turn = false;
+            } else {
+                player2Select = showRequest_array.description[selectedValue]["#TITLE"];
+                player1Turn = true;
+            };
+        });
+    });
 };
 
 //Clears the selected elements 

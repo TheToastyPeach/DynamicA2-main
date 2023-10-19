@@ -49,11 +49,22 @@ p {
     margin: 0;
 }
 
+input {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
 .main-button{
     text-decoration: none;
     font-weight: normal;
     font-size: 1rem;
-    padding: 5%;
+    padding: 14px;
+    margin: 10px;
     display: inline-block;
     background-color: white;
     transition: 0.3s;
@@ -61,7 +72,7 @@ p {
 }
 
 .main-button:hover {
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px;
     background-color: #ffffffad;
 }
 
