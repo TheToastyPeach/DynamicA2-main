@@ -42,13 +42,13 @@ function searchRequest() {
 //Co-pilot recommended this but it didn't work so I changed it (Not sure if I have to source this)
 const form = document.querySelector('form');
 form.addEventListener('submit', (event) => {
-  event.preventDefault(); // prevent the form from submitting
+    event.preventDefault();
   var userInput = document.querySelector('#userInput').value;
   urlQuery = userInput;
 
   setURL(urlQuery, "q");
-  clearElements('.searchR');
-  clearElements('.selectR');
+   clearElements('.searchR');
+   clearElements('.selectR');
   searchRequest();
   console.log(url);
 
@@ -93,6 +93,7 @@ function imageSelect () {
 
 
         clearElements('.searchR');
+        clearElements('.searchO');
 //Sets the target to details
         setURL(urlDetails, "t");
 console.log(url);
@@ -154,20 +155,13 @@ function selectResult() {
                     +  "<p>" + showRequest_array.short.aggregateRating.ratingValue + " stars on IMDB</p>"
                 + "</div>"
 //Vote button
-                + "<div><button type='button' class='main-button'> Choose this film! </button></div>"
+                + "<div class='centerContent'><button type='button' class='main-button' id='film-choice-button'> Choose this film </button>"
+                + " <button type='button' class='main-button' id='back-button'> Go back </button></div>"
                 + "</div>";
 
         document.getElementById("SelectedImage").appendChild(selectR);
-
-        form.addEventListener('button', (event) => {
-            if (player1Turn == true) {
-                player1Select = showRequest_array.description[selectedValue]["#TITLE", "IMG_POSTER" ];
-                player1Turn = false;
-            } else {
-                player2Select = showRequest_array.description[selectedValue]["#TITLE"];
-                player1Turn = true;
-            };
-        });
+        playerChoice();
+        
     });
 };
 
@@ -186,7 +180,80 @@ function setURL (setValue, type) {
     };
 };
 
+//Get the current player's choice and store it
+function playerChoice () {
+    const chooseBckBtn = document.getElementById('back-button');
+    chooseBckBtn.addEventListener('click', () => {
+        clearElements('.selectR');
+        clearElements('.searchO');
+        createContentSearch();
+    });
+    const chooseFilmBtn = document.getElementById('film-choice-button');
+    chooseFilmBtn.addEventListener('click', () => {
+        if (player1Turn == true) {
+            player1Select = {
+                title: showRequest_array.main.titleText.text,
+                image: showRequest_array.short.image,
+                date: showRequest_array.short.datePublished,
+                reveiw: showRequest_array.short.aggregateRating.ratingValue,
+                revenue: showRequest_array.main.worldwideGross.total.amount
+                
+            };
+            player1Turn = false;
+            console.log(player1Select);
+            clearElements('.selectR');
+            // createContentSearch();
+        } else {
+            player2Select = {
+                title: showRequest_array.main.titleText.text,
+                image: showRequest_array.short.image,
+                date: showRequest_array.short.datePublished,
+                reveiw: showRequest_array.short.aggregateRating.ratingValue,
+                revenue: showRequest_array.main.worldwideGross.total.amount
+            };
+            player1Turn = true;
+            console.log(player2Select);
+            // clearElements('.selectR');
+        };
+
+    });
+};
+
+function createContentSearch () {
+    const contentSearch = document.createElement("div");
+    contentSearch.className = "searchO";
+        contentSearch.innerHTML = "<div class='centerContent'>"
+        + "<form>" //<!--Co-pilot recommended this-->
+        + "<div>"
+        + "<label for='userInput'>Find a film!</label>"
+        + "</div>"
+        + "<input type='text' id='userInput' name='userInput'>"
+        + "<button type='submit' class='main-button'> Search </button>"
+        + "</form>";
+    document.getElementById("ContentSearch").appendChild(contentSearch);
+};
 
 
-//How you display the contet, finding key words, showing themes or reoccuring content
-//That crazy friend 
+// function homeDisplay () {
+//     const home = document.createElement("div");
+//     home.className = "home";
+//         home.innerHTML = "<div class='centerContent'>"
+//             + "<h2> Welcome to the Film Picker! </h2>"
+//             + "<p> This is a tool to help you and your friends decide on a film to watch. </p>"
+//             + "<p> Simply search for a film and click on the one you want to watch. </p>"
+//             + "<p> Once you have selected a film, click the 'Choose this film!' button to add it to your list. </p>"
+//             + "<p> Once you have both selected a film, click the 'Compare' button to see which film is the best choice. </p>"
+//             + "<p> If you want to change your choice, simply click on a new film and click the 'Choose this film!' button again. </p>"
+//             + "<p> If you want to start again, click the 'Reset' button. </p>"
+//             + "<p> Have fun! </p>"
+//             + "</div>"
+//             + "<div class='centerContent'>"
+//             + "<button type='button' class='main-button' id='reset-button'> Reset </button>"
+//             + "</div>";
+//     document.getElementById("PrimaryContent__group").appendChild(home);
+// }
+
+
+    
+
+
