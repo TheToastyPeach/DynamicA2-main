@@ -138,19 +138,20 @@ function selectResult() {
                 + " <img src='" + showRequest_array.short.image + "'>" 
                 + "</figure></div>"
 //Show or Movie Details 
-                + "<div><h3> Summary: </h3>"
-                + "<div><p>" + showRequest_array.short.description + "</p>"
-                + "<h3>Rating & Release </h3>"
-                + "<p> Rating: " + showRequest_array.short.contentRating + "</p>" 
-                + "<p> Realease Date: " + showRequest_array.short.datePublished + "</p>"
-                + (showRequest_array.main.worldwideGross ? // scuffed if statement
-                    "<h3> Box Office: </h3>"
-                    + "<p>" + JSON.parse(showRequest_array.main.worldwideGross.total.amount).toLocaleString() + "$ USD</p>"
-                    : "") // if there are no box office details, don't display anything
-                + "<h3> Genre/s: </h3>"
-                + "<p>" + showRequest_array.short.genre + "</p>"
-                + "<h3> Average Rating: </h3>"
-                +  "<p>" + showRequest_array.short.aggregateRating.ratingValue + " stars on IMDB</p>"
+                + "<div class='centerContent'>"
+                    + "<h3> Summary: </h3>"
+                    + "<div><p>" + showRequest_array.short.description + "</p>"
+                    + "<h3>Rating & Release </h3>"
+                    + "<p> Rating: " + showRequest_array.short.contentRating + "</p>" 
+                    + "<p> Realease Date: " + showRequest_array.short.datePublished + "</p>"
+                    + (showRequest_array.main.worldwideGross ? // scuffed if statement
+                        "<h3> Box Office: </h3>"
+                        + "<p>" + JSON.parse(showRequest_array.main.worldwideGross.total.amount).toLocaleString() + "$ USD</p>"
+                        : "") // if there are no box office details, don't display anything
+                    + "<h3> Genre/s: </h3>"
+                    + "<p>" + showRequest_array.short.genre + "</p>"
+                    + "<h3> Average Rating: </h3>"
+                    +  "<p>" + showRequest_array.short.aggregateRating.ratingValue + " stars on IMDB</p>"
                 + "</div>"
 //Vote button
                 + "<div><button type='button' class='main-button'> Choose this film! </button></div>"

@@ -9,7 +9,7 @@ html, body {
 }
 
 img {
-    max-width: 80%;
+    max-width: 100%;
     border-radius: 5px;
     margin: 0;
 }
@@ -79,6 +79,12 @@ h4 {
     font-weight: normal;
 }
 
+.centerContent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .main-button{
     text-decoration: none;
     font-weight: normal;
@@ -107,7 +113,7 @@ h4 {
     display: grid;
     font-weight: normal;
     font-size: 1.25rem;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 h2.selectR {
